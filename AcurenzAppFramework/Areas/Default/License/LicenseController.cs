@@ -76,9 +76,9 @@ namespace AcurenzAppFramework.Controllers
         public virtual JsonResult GetStates()
         {
             var list = new List<string>
-    {
-        "Alabama","Alaska","Arizona","Arkansas","California"
-    };
+            {
+                "Alabama","Alaska","Arizona","Arkansas","California"
+            };
             //var results = list.Where(n => n.ToLower().Contains(term.ToLower()));
             return new JsonResult()
             {

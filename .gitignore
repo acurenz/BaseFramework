@@ -87,6 +87,9 @@ _ReSharper*/
 # JustCode is a .NET coding addin-in
 .JustCode
 
+# JustMock
+*.jmconfig
+
 # TeamCity is a build add-in
 _TeamCity*
 
