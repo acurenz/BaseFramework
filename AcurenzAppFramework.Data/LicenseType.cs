@@ -17,7 +17,6 @@ namespace AcurenzAppFramework.Data
         public System.DateTime DateUpdated { get; set; }
         public string UpdatedBy { get; set; }
 
-        //testing git access
         public ICollection<PersonIdentification> Persons { get; set; }
     }
 }
