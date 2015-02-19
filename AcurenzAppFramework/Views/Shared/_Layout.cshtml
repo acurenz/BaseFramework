@@ -34,6 +34,7 @@
                     <li><a href="typography.html"><i class="fa fa-font"></i> Typography</a></li>
                     <li><a href="bootstrap-elements.html"><i class="fa fa-list-ul"></i> Bootstrap Elements</a></li>
                     <li><a href="bootstrap-grid.html"><i class="fa fa-table"></i> Bootstrap Grid</a></li>
+                    <li><a href="@Url.Action("Index", "CustomerAddress")"><i class="fa fa-list-ol"></i> Customer Address</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
                     <li class="dropdown messages-dropdown">
@@ -76,6 +77,9 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/notyjs")
+    @Scripts.Render("~/bundles/notylayout")
+    @Scripts.Render("~/bundles/notythemes")  
     @RenderSection("scripts", required: false)
 </body>
 </html>

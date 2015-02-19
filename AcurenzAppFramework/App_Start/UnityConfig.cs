@@ -47,6 +47,7 @@ namespace AcurenzAppFramework.App_Start
             container.RegisterType<IDriverLicenseService, DriverLicenseService>(new PerRequestLifetimeManager());
             //container.RegisterType<IRepository<LicenseType>,Repository<LicenseType>>(new PerRequestLifetimeManager());
             container.RegisterType<IUnitOfWorkForService,UnitOfWork>(new PerRequestLifetimeManager());
+            container.RegisterType<ICustomerService, CustomerService>(new PerRequestLifetimeManager());
         }
     }
 }

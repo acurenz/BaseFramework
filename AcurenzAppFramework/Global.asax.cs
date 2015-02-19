@@ -24,7 +24,7 @@ namespace AcurenzAppFramework
 
             using (var ctx = new DriverLicenseStoreContext())
             {
-                ctx.Database.Initialize(false);
+                ctx.Database.Initialize(true);
             }
         }
     }

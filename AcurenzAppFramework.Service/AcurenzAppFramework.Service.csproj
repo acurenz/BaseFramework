@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerService.cs" />
     <Compile Include="DriverLicenseService.cs" />
+    <Compile Include="ICustomerService.cs" />
     <Compile Include="IDriverLicenseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

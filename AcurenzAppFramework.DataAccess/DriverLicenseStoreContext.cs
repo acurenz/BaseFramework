@@ -15,7 +15,7 @@ namespace AcurenzAppFramework.DataAccess
          public DriverLicenseStoreContext()
             : base("Name=DriverLicenseStoreContext")
         {
-            Database.SetInitializer<DriverLicenseStoreContext>(new DropCreateDatabaseIfModelChanges<DriverLicenseStoreContext>());
+            Database.SetInitializer<DriverLicenseStoreContext>(new DriverLicenseStoreInitializer());
             Configuration.ProxyCreationEnabled = false;
         }
 

@@ -14,6 +14,17 @@ namespace AcurenzAppFramework
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/notyjs").Include("~/Scripts/noty/jquery.noty.js"));
+
+            var array1 = new string[]{
+                "~/Scripts/noty/layouts/bottom.js","~/Scripts/noty/layouts/bottomCenter.js","~/Scripts/noty/layouts/bottomLeft.js","~/Scripts/noty/layouts/bottomRight.js","~/Scripts/noty/layouts/center.js","~/Scripts/noty/layouts/centerLeft.js","~/Scripts/noty/layouts/centerRight.js","~/Scripts/noty/layouts/inline.js","~/Scripts/noty/layouts/top.js","~/Scripts/noty/layouts/topCenter.js","~/Scripts/noty/layouts/topLeft.js","~/Scripts/noty/layouts/topRight.js"};
+
+            bundles.Add(new ScriptBundle("~/bundles/notylayout").Include(
+                        array1));
+            var array = new string[]{
+                "~/Scripts/noty/themes/bootstrap.js","~/Scripts/noty/themes/default.js"};
+            bundles.Add(new ScriptBundle("~/bundles/notythemes").Include(array));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

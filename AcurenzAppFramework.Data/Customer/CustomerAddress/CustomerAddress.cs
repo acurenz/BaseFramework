@@ -22,11 +22,12 @@ namespace AcurenzAppFramework.Data
         public bool IsVerified { get; set; }
         public bool AcceptDelivery { get; set; }
         public DateTime DateEffective { get; set; }
-        public DateTime DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
         public DateTime DateUpdated { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
+        public long CustomerNumber { get; set; }
 
         public virtual CustomerAddressType CustomerAddressType { get; set; }
         public virtual Customer Customer { get; set; }

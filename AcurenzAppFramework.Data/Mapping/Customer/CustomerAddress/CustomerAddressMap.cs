@@ -16,7 +16,8 @@ namespace AcurenzAppFramework.Data.Mapping
 
             HasRequired(t => t.CustomerAddressType).WithMany(t => t.CustomerAddresses).HasForeignKey(t => t.CustomerAddressTypeID);
             HasRequired(t => t.Customer).WithMany(t => t.CustomerAddresses).Map(t => t.MapKey("CustomerNumber")).WillCascadeOnDelete();
-            
+            //HasRequired(t => t.Customer).WithMany().HasForeignKey(t => t.CustomerNumber).WillCascadeOnDelete();
+
             this.HasKey(t => t.CustomerAddressID);
             this.Property(t => t.CustomerAddressID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(t => t.ContactName).HasColumnName("ContactName").IsRequired();
@@ -33,6 +34,7 @@ namespace AcurenzAppFramework.Data.Mapping
             this.Property(t => t.DateUpdated).HasColumnName("DateUpdated");
             this.Property(t => t.UpdatedBy).HasColumnName("UpdatedBy");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
+            this.Ignore(t => t.CustomerNumber);
         }
     }
 }

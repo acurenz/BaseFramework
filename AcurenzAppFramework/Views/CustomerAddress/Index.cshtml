@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Customer Address";
+}
+<div class="container">
+    <div class="col-sm-offset-2">
+        <div class="page-header">
+            <h1>Customer Address </h1>
+        </div>
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="Active">CustomerAddress</li>
+        </ol>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true);
+                <div class="form-group">
+                    <label for="CustomerNumber" class="control-label col-md-2">Customer Number</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("CustomerNumber", null, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessage("CustomerNumber")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="CustomerAddressTypeID" class="control-label col-md-2">Customer Address Type</label>
+                    <div class="col-md-10">
+                        <select id="CustomerAddressTypeID" class="form-control"></select>
+                        @Html.ValidationMessage("CustomerAddressTypeID")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ContactName" class="control-label col-md-2">Contact Name</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("ContactName", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("ContactName")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Address1" class="control-label col-md-2">Address1</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("Address1", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("Address1")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Address2" class="control-label col-md-2">Address2</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("Address2", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("Address2")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="City" class="control-label col-md-2">City</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("City", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("City")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="State" class="control-label col-md-2">State</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("State", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("State")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ZipCode" class="control-label col-md-2">ZipCode</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("ZipCode", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("ZipCode")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Country" class="control-label col-md-2">Country</label>
+                    <div class="col-md-10">
+                        @Html.TextBox("Country", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("Country")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="AcceptDelivery" class="control-label col-md-2" style="display:inline">Accept Delivery</label>
+                    <div class="col-md-10">
+                        @Html.CheckBox("AcceptDelivery")
+                        @Html.ValidationMessage("AcceptDeliver")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button type="button" id="save" class="btn btn-primary btn-sm">Save</button>
+                        or @Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+        var flag = false;
+        $(document).ready(function () {
+            $('#save').on("click", SaveCustomerAddress);
+            $('#CustomerNumber').val(510123);
+            if (flag) return;
+            $.ajax({
+                url: '/CustomerAddressType/GetAll',
+                type: 'GET',
+                dataType: 'json',
+                success: function (result) {
+                    $('#CustomerAddressTypeID').append('<option value="' + -1 + '">Select</option>');
+                    $.each(result.data, function (i, variant) {
+                        $('#CustomerAddressTypeID').append('<option value="' + variant.CustomerAddressTypeID + '">' + variant.DisplayCode + '</option>');
+                    })},
+                error: function (data) {
+                    
+                }
+            })
+        });
+
+        function SaveCustomerAddress() {
+            noty({
+                text: 'Do you want to continue?',
+                buttons: [
+                    {
+                        addClass: 'btn btn-primary', text: 'Yes', onClick: function ($noty) {
+                            $noty.close();
+                            var url = '/CustomerAddressType/Save';
+                            $.post(url, GetCurrentModel(), function (data) {
+                                var n = noty({
+                                    text: 'Customer Address Added Succesfully',
+                                    type: 'success',
+                                    layout: 'topCenter',
+                                    timeout: 1500
+                                });
+                                ResetModel();
+                            }).error(function () {
+                                var n = noty({
+                                    text: 'Error Occured while processing',
+                                    type: 'error',
+                                    layout: 'topCenter',
+                                    timeout: 1500
+                                });
+                            }
+                            );
+                        }
+                    },
+                    {
+                        addClass: 'btn btn-danger btn-small', text: 'Cancel', onClick: function ($noty) {
+                            $noty.close();
+                        }
+                    }
+                ],
+                layout:'center'
+            });
+        }
+
+        function ResetModel()
+        {
+            $('#ContactName').val("");
+            $('#Address1').val("");
+            $('#Address2').val("");
+            $('#City').val("");
+            $('#State').val("");
+            $('#ZipCode').val("");
+            $('#AcceptDelivery').attr('checked', false);
+            $('#Country').val("");
+            $('#CustomerAddressTypeID').val(-1);
+        }
+
+        function GetCurrentModel()
+        {
+            var CustomerAddress = {
+                CustomerNumber: $('#CustomerNumber').val(),
+                ContactName: $('#ContactName').val(),
+                Address1: $('#Address1').val(),
+                Address2: $('#Address2').val(),
+                City: $('#City').val(),
+                State: $('#State').val(),
+                ZipCode: $('#ZipCode').val(),
+                AcceptDelivery: $('#AcceptDelivery').val(),
+                CustomerAddressTypeID: $('#CustomerAddressTypeID').val(),
+                Country: $('#Country').val()
+            };
+            return CustomerAddress;
+        }
+    </script>
+}
